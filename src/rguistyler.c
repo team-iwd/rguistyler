@@ -115,7 +115,8 @@
 #define TOOL_RELEASE_DATE       "Sep.2023"
 #define TOOL_LOGO_COLOR         0x62bde3ff
 
-#define SUPPORT_COMPRESSED_FONT_ATLAS
+// #define SUPPORT_COMPRESSED_FONT_ATLAS
+#undef SUPPORT_COMPRESSED_FONT_ATLAS
 
 #include "raylib.h"
 
