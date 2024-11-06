@@ -29,11 +29,11 @@
 PLATFORM              ?= PLATFORM_DESKTOP
 
 # Define project variables
-PROJECT_NAME          ?= rtoolname
+PROJECT_NAME          ?= rguistyler
 PROJECT_VERSION       ?= 1.0
 PROJECT_BUILD_PATH    ?= .
 
-RAYLIB_PATH           ?= C:/GitHub/raylib
+RAYLIB_PATH           ?= ../../raylib
 RAYLIB_INCLUDE_PATH   ?= $(RAYLIB_PATH)/src
 RAYLIB_LIB_PATH       ?= $(RAYLIB_PATH)/src
 
@@ -97,6 +97,9 @@ endif
 CC = gcc
 
 ifeq ($(PLATFORM),PLATFORM_DESKTOP)
+    ifeq ($(PLATFORM_OS),WINDOWS)
+        CC = x86_64-w64-mingw32-gcc
+    endif
     ifeq ($(PLATFORM_OS),OSX)
         # OSX default compiler
         CC = clang
@@ -124,12 +127,6 @@ endif
 # Define default make program: MAKE
 #------------------------------------------------------------------------------------------------
 MAKE ?= make
-
-ifeq ($(PLATFORM),PLATFORM_DESKTOP)
-    ifeq ($(PLATFORM_OS),WINDOWS)
-        MAKE = mingw32-make
-    endif
-endif
 
 # Define compiler flags: CFLAGS
 #------------------------------------------------------------------------------------------------
@@ -301,7 +298,7 @@ endif
 # Define source code files required
 #------------------------------------------------------------------------------------------------
 PROJECT_SOURCE_FILES ?= \
-    rtoolname.c \
+    rguistyler.c \
     external/tinyfiledialogs.c
 
 # Define all object files from source files
@@ -330,7 +327,6 @@ ifeq ($(PLATFORM),PLATFORM_DESKTOP)
 		del *.o *.exe /s
     endif
     ifeq ($(PLATFORM_OS),LINUX)
-		find . -type f -executable -delete
 		rm -fv *.o
     endif
     ifeq ($(PLATFORM_OS),OSX)
